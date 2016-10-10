@@ -15,12 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import static android.graphics.Color.WHITE;
+
+public class MainActivity extends AppCompatActivity implements MainActivityView {
+
     LinearLayout linearLayout;
+
     EditText editText;
+
     TextView textView;
+
     Spinner colorSpinner;
+
     Button launchActivityButton;
+
+    MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +43,12 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
 
+        // Setup Presenter
+        presenter = new MainActivityPresenter(this);
+
         // Setup Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.colors_array, android.R.layout.simple_spinner_item);
+            R.array.colors_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colorSpinner.setAdapter(adapter);
 
@@ -45,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView tv, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String text = tv.getText().toString();
-                    textView.setText(text);
+                    presenter.editTextUpdated(text);
                 }
                 return false;
             }
@@ -54,31 +66,35 @@ public class MainActivity extends AppCompatActivity {
         colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int index, long id) {
-                switch (index) {
-                    case 0:
-                        linearLayout.setBackgroundColor(Color.WHITE);
-                        break;
-                    case 1:
-                        linearLayout.setBackgroundColor(Color.MAGENTA);
-                        break;
-                    case 2:
-                        linearLayout.setBackgroundColor(Color.GREEN);
-                        break;
-                    case 3:
-                        linearLayout.setBackgroundColor(Color.CYAN);
-                        break;
-                }
+                presenter.colorSelected(index);
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         launchActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OtherActivity.class);
-                startActivity(intent);
+                presenter.launchOtherActivityButtonClicked(OtherActivity.class);
             }
         });
+    }
+
+    @Override
+    public void changeTextViewText(String text) {
+        textView.setText(text);
+    }
+
+    @Override
+    public void changBackgroundColor(int color) {
+        linearLayout.setBackgroundColor(color);
+    }
+
+    @Override
+    public void launchOtherActivity(Class activity) {
+        Intent intent = new Intent(MainActivity.this, activity);
+        startActivity(intent);
     }
 }
