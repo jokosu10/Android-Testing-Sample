@@ -31,7 +31,7 @@ public class MainActivityPresenterTest {
         String givenString = "test1";
 
         // Act
-//        presenter.editTextUpdated(givenString);
+        presenter.editTextUpdated(givenString);
 
         // Assert
         Mockito.verify(view).changeTextViewText(givenString);
@@ -44,7 +44,7 @@ public class MainActivityPresenterTest {
         int givenColor = Color.GREEN;
 
         // Act
-//        presenter.colorSelected(index);
+        presenter.colorSelected(index);
 
         // Assert
         Mockito.verify(view).changeBackgroundColor(givenColor);
