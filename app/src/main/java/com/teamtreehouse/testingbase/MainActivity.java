@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
-    public void changBackgroundColor(int color) {
+    public void changeBackgroundColor(int color) {
         linearLayout.setBackgroundColor(color);
     }
 

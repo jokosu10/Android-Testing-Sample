@@ -21,16 +21,16 @@ public class MainActivityPresenter {
     public void colorSelected(int index) {
         switch (index) {
             case 0:
-                view.changBackgroundColor(Color.WHITE);
+                view.changeBackgroundColor(Color.WHITE);
                 break;
             case 1:
-                view.changBackgroundColor(Color.MAGENTA);
+                view.changeBackgroundColor(Color.MAGENTA);
                 break;
             case 2:
-                view.changBackgroundColor(Color.GREEN);
+                view.changeBackgroundColor(Color.GREEN);
                 break;
             case 3:
-                view.changBackgroundColor(Color.CYAN);
+                view.changeBackgroundColor(Color.CYAN);
                 break;
         }
     }

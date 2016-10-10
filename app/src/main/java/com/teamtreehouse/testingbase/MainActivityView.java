@@ -8,7 +8,7 @@ public interface MainActivityView {
 
     void changeTextViewText(String text);
 
-    void changBackgroundColor(int color);
+    void changeBackgroundColor(int color);
 
     void launchOtherActivity(Class activity);
 }
