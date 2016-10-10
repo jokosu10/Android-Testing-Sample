@@ -23,3 +23,14 @@ AppCompatDelegateImplV9(Context context, Window window, AppCompatCallback callba
 
 This will throws Null Pointer Exception, since activity objects requires a window variable.
 But Window variable only exist on your phone android.jar
+
+## Testing Android MVP way
+
+To solve this missing activity problem, we can use MVP architecture.
+MVP allows us for separating concern for contract and implementation.
+
+Assuming the view implementation, which is Android SDK, we can test our presenter to do it's job.
+
+
+We can "test" our view to correctly implement what presenter want. But this doesn't really test the actual result.
+What actually happened is we're blindly trusting Android SDK's framework to do its job.
