@@ -34,3 +34,26 @@ Assuming the view implementation, which is Android SDK, we can test our presente
 
 We can "test" our view to correctly implement what presenter want. But this doesn't really test the actual result.
 What actually happened is we're blindly trusting Android SDK's framework to do its job.
+
+## Shadow Activity
+Sonic is not the only character who has Shadow, Activity also has ShadowActivity as well.
+ShadowActivity has extra functionality to verify Activity action, like getting an intent.
+
+## Espresso Syntax
+Espresso Syntax consist of three part, View Matcher, View Action and View Assertion.
+```
+onView(withId(R.id.edit_text)).perform(typeText("Hello World"));
+----------------------------    -------------------------------
+        View Matcher                    View Action
+```
+I think the syntax is pretty self-explanatory,
+View Matcher is for find a view, View Action is performing an action,
+and View Assertion is to assert a view.
+
+To assert a view, change View Action part into View Assertion.
+
+```
+onView(withId(R.id.editText)).check(doesNotExist());
+----------------------------    -------------------
+        View Matcher                View Assertion
+```
